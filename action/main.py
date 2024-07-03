@@ -20,11 +20,11 @@ if VERSION != "":
         sys.exit(1)
     version_specifier = f"=={VERSION}"
 
-req = f"ruff{version_specifier}"
+req = f"ruff{version_specifier} check"
 
 # If CHANGED_FILES is not empty, split it into a list; otherwise, use SRC
 files_to_check = shlex.split(CHANGED_FILES or SRC)
 
-proc = run(["pipx", "run check", req, *shlex.split(ARGS), *files_to_check])
+proc = run(["pipx", "run", req, *shlex.split(ARGS), *files_to_check])
 
 sys.exit(proc.returncode)
